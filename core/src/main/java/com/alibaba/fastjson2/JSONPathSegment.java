@@ -31,6 +31,14 @@ abstract class JSONPathSegment {
 
     public boolean contains(JSONPath.Context context) {
         eval(context);
+        Object value = context.value;
+        if (value instanceof JSONArray) {
+            JSONArray arr = (JSONArray) value;
+
+            if (arr.isEmpty()) {
+                context.value = null;
+            }
+        }
         return context.value != null;
     }
 
